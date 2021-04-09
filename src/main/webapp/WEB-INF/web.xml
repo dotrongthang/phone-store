@@ -5,7 +5,7 @@
          version="3.0">
     <display-name>phone-store</display-name>
 
-    <listener>
+   <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
@@ -30,7 +30,6 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-    
     
     <!-- sitemesh filter -->
     <filter>
