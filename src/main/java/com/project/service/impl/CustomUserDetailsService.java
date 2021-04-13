@@ -18,9 +18,8 @@ import com.project.entity.RoleEntity;
 import com.project.entity.UserEntity;
 import com.project.repository.UserRepository;
 
-
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService{
 
 	@Autowired
 	private UserRepository userRepository;
@@ -43,4 +42,5 @@ public class CustomUserDetailsService implements UserDetailsService {
 		myUser.setFullName(userEntity.getFullName());
 		return myUser;
 	}
+
 }
