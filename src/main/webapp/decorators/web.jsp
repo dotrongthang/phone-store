@@ -14,7 +14,7 @@
 </head>
 <body>
 
-	<!-- Navigation -->
+<!-- Navigation -->
 		<%@ include file="/common/web/header.jsp" %>
 
 	<dec:body/>

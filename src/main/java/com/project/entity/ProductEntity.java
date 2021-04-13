@@ -9,11 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name= "product")
-public class ProductEntity {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class ProductEntity extends BaseEntity {
 	
 	@Column(name = "name")
 	private String name;
@@ -35,11 +31,6 @@ public class ProductEntity {
 	
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
-	
-
-	public Long getId() {
-		return id;
-	}
 
 	public String getName() {
 		return name;

@@ -12,8 +12,12 @@
 		<pattern>/quan-tri*</pattern>
 	</decorator>
 
-<!-- 	<decorator page="login.jsp" name="login">
+	<decorator page="login.jsp" name="login">
 		<pattern>/dang-nhap</pattern>
-	</decorator> -->
+	</decorator>
+	
+	<decorator page="register.jsp" name="register">
+		<pattern>/dang-ky</pattern>
+	</decorator>
 
 </decorators>

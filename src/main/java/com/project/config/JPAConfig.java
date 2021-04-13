@@ -1,4 +1,4 @@
-package config;
+package com.project.config;
 
 import java.util.Properties;
 
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = {"com.project.repository"})
 @EnableTransactionManagement
 public class JPAConfig {
-
+	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -48,7 +48,7 @@ public class JPAConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/projectphonestore");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/phonestore");
 		dataSource.setUsername("root");
 		dataSource.setPassword("1234");
 		return dataSource;
@@ -56,11 +56,10 @@ public class JPAConfig {
 	
 	Properties additionalProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+//		properties.setProperty("hibernate.hbm2ddl.auto", "create");
 //		properties.setProperty("hibernate.hbm2ddl.auto", "update");
-//		properties.setProperty("hibernate.hbm2ddl.auto", "none");
-//		properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
+		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 		return properties;
 	}
-
 }
