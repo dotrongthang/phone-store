@@ -2,9 +2,12 @@ package com.project.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +34,10 @@ public class ProductEntity extends BaseEntity {
 	
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+    private CategoryEntity category;
 
 	public String getName() {
 		return name;
@@ -86,6 +93,14 @@ public class ProductEntity extends BaseEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public CategoryEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
 	}
 	
 	

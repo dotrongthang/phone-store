@@ -10,7 +10,7 @@
 <link href="<c:url value='/template/web/vendor/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<c:url value='/template/web/css/heroic-features.css" rel="stylesheet'/>" rel="stylesheet"type="text/css">
+<link href="<c:url value='/template/web/css/shop-homepage.css" rel="stylesheet'/>" rel="stylesheet"type="text/css">
 </head>
 <body>
 

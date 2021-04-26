@@ -7,6 +7,7 @@ public class ProductDTO extends AbstractDTO<ProductDTO> {
 	private Long price;
 	private Long sold;
 	private Long categoryId;
+	private String categoryCode;
 	private String description;
 	private String color;
 	private Long count;
@@ -59,7 +60,12 @@ public class ProductDTO extends AbstractDTO<ProductDTO> {
 	public void setCount(Long count) {
 		this.count = count;
 	}
-	
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
 	
 	
 }

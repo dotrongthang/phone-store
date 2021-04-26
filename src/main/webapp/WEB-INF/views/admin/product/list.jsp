@@ -1,8 +1,8 @@
 <%@include file="/common/taglib.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<c:url var="newAPI" value="/api/new"/>
-<c:url var="newURL" value="/quan-tri/san-pham/danh-sach"/>
+<c:url var="productAPI" value="/api/product"/>
+<c:url var="productURL" value="/quan-tri/san-pham/danh-sach"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,7 +21,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="#">Trang chủ</a>
+								<a href="<c:url value= '/trang-chu'/>">Trang chủ</a>
 							</li>
 						</ul>
 						<!-- /.breadcrumb -->
@@ -38,10 +38,10 @@
 									<div class="table-btn-controls">
 										<div class="pull-right tableTools-container">
 											<div class="dt-buttons btn-overlap btn-group">
-												<c:url var="createNewURL" value="/quan-tri/bai-viet/chinh-sua"></c:url>
+												<c:url var="createProductURL" value="/quan-tri/san-pham/chinh-sua"></c:url>
 												<a flag="info"
 												   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-												   title='Thêm sản phẩm' href='${createNewURL}'>
+												   title='Thêm sản phẩm' href='${createProductURL}'>
 															<span>
 																<i class="fa fa-plus-circle bigger-110 purple"></i>
 															</span>
@@ -65,8 +65,10 @@
 														<th><input type="checkbox" id="checkAll"></th>
 														<th>Tên sản phẩm</th>
 														<th>Mô tả sản phẩm</th>
+														<th>Màu sắc</th>
 														<th>Giá nhập</th>
 														<th>Giá bán</th>
+														<th>Số lượng</th>
 														<th>Thao tác</th>
 													</tr>
 												</thead>
@@ -76,14 +78,16 @@
 															<td><input type="checkbox" id="checkbox_${item.id}" value="${item.id}"></td>
 															<td>${item.name}</td>
 															<td>${item.description}</td>
+															<td>${item.color}</td>
 															<td>${item.price}</td>
 															<td>${item.sold}</td>
+															<td>${item.count}</td>
 															<td>		
-																<c:url var="updateNewURL" value="/quan-tri/bai-viet/chinh-sua">
+																<c:url var="updateProductURL" value="/quan-tri/san-pham/chinh-sua">
 																	<c:param name="id" value="${item.id}"/>
 																</c:url>														
 																<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-																   title="Cập nhật bài viết" href='${updateNewURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+																   title="Cập nhật sản phẩm" href='${updateProductURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 																</a>
 															</td>
 														</tr>
@@ -140,22 +144,22 @@
 							var ids = $('tbody input[type=checkbox]:checked').map(function () {
 					            return $(this).val();
 					        }).get();
-							deleteNew(ids);
+							deleteProduct(ids);
 					  } 
 					});
 			}
 			
-			function deleteNew(data) {
+			function deleteProduct(data) {
 		        $.ajax({
-		            url: '${newAPI}',
+		            url: '${productAPI}',
 		            type: 'DELETE',
 		            contentType: 'application/json',
 		            data: JSON.stringify(data),
 		            success: function (result) {
-		                window.location.href = "${newURL}?page=1&limit=2&message=delete_success";
+		                window.location.href = "${productURL}?page=1&limit=2&message=delete_success";
 		            },
 		            error: function (error) {
-		            	window.location.href = "${newURL}?page=1&limit=2&message=error_system";
+		            	window.location.href = "${productURL}?page=1&limit=2&message=error_system";
 		            }
 		        });
 		    }

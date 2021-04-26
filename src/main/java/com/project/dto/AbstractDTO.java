@@ -1,9 +1,8 @@
 package com.project.dto;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.protobuf.Timestamp;
 
 public class AbstractDTO<T> {
 	

@@ -5,7 +5,7 @@
          version="3.0">
     <display-name>phone-store</display-name>
 
-   <listener>
+    <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
@@ -45,7 +45,7 @@
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
     
-    <!-- sitemesh filter -->
+<!-- sitemesh filter -->
     <filter>
     	<filter-name>sitemesh</filter-name>
     	<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
