@@ -21,8 +21,7 @@
         <session-management invalid-session-url="/dang-nhap?sessionTimeout"/>
         <logout delete-cookies="JSESSIONID"/>
     </http>
-    
-    <authentication-manager >
+   <authentication-manager >
         <authentication-provider user-service-ref="customUserDetailsService">
         		<password-encoder ref="bcryptEncoder"/>
         </authentication-provider>

@@ -9,9 +9,12 @@
 </head>
 <body>
 	<div class="container">
-		<!-- <h1 class="form-heading">login Form</h1> -->
+		
+		<!-- <h1 class="form-heading">Đăng nhập hệ thống</h1> -->
 		<div class="login-form">
 			<div class="main-div">
+				<h3 class="form-title">Đăng nhập hệ thống</h3>
+				<br></br>
 				<c:if test="${param.incorrectAccount != null}">
 					<div class="alert alert-danger">	
 							Username or password incorrect
@@ -32,6 +35,11 @@
 					</div>
 					<button type="submit" class="btn btn-primary" >Đăng nhập</button>
 				</form>
+				<br></br>
+				<p class="loginhere">
+					Bạn chưa có tài khoản? <a href="<c:url value= '/dang-ky'/>"
+						class="loginhere-link">Đăng ký ngay</a>
+				</p>
 			</div>
 		</div>
 	</div>

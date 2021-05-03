@@ -1,8 +1,11 @@
 package com.project.controller.web;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -11,12 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.service.ICategoryService;
+import com.project.util.MessageUtil;
+
 @Controller(value = "homeControllerOfWeb")
 public class HomeController {
+	
+	@Autowired
+	private ICategoryService categoryService;
+	
+	@Autowired
+	private MessageUtil messageUtil;
 	
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	   public ModelAndView homePage() {
 	      ModelAndView mav = new ModelAndView("web/home");
+	      mav.addObject("categories", categoryService.findAll());
 	      return mav;
 	   }
 
@@ -28,8 +41,13 @@ public class HomeController {
 	   }
 	
 	@RequestMapping(value = "/dang-ky", method = RequestMethod.GET)
-	   public ModelAndView registerPage() {
+	   public ModelAndView registerPage(HttpServletRequest request) {
 	      ModelAndView mav = new ModelAndView("register");
+	      if (request.getParameter("message") != null) {
+	    	  	Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
+				mav.addObject("message", message.get("message"));
+				mav.addObject("alert",  message.get("alert"));
+		}
 	      return mav;
 	   }
 	
