@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/common/taglib.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <c:url var="APIurl" value="/api/register" />
 <c:url var="registerURL" value="/dang-ky"/>
@@ -30,6 +31,13 @@
 						<input type="text" class="form-input" name="username"
 							id="username" placeholder="Tài khoản" />
 					</div>
+					
+					<c:forEach var="item" items="${model.listResult}">
+						<c:if test="${item.username = 'admin' }">
+							<c:out value="Tài khoản đã được sử dụng"></c:out>
+						</c:if>		
+					</c:forEach>
+					
 					<div class="form-group">
 						<input type="text" class="form-input" name="password"
 							id="password" placeholder="Mật khẩu" /> 
@@ -43,7 +51,7 @@
 
 					<div class="form-group">
 						<input type="submit" name="submit" id="submit" class="form-submit"
-							value="Sign up" />
+							value="Đăng ký" />
 					</div>
 				</form>
 				<p class="loginhere">
@@ -62,11 +70,6 @@
 			var data = {};
 			var formData = $('#signup-form').serializeArray();
 			$.each(formData, function(i, v) {
-				/* if(v.name == "password"){
-					data["" + v.name + ""] = CryptoJS.MD5(v.value).toString();
-				} else{
-					data["" + v.name + ""] = v.value;
-				} */
 				data["" + v.name + ""] = v.value;
 			});
 			register(data);

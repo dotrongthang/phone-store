@@ -21,4 +21,13 @@ public class UserConverter {
 		result.setRoles(roles);
 		return result;
 	}
+	
+	public UserDTO toDto(UserEntity entity) {
+		UserDTO result = new UserDTO();
+		result.setId(entity.getId());
+		result.setFullname(entity.getFullName());
+		result.setUsername(entity.getUserName());
+		result.setPassword(entity.getPassword());
+		return result;
+	}
 }

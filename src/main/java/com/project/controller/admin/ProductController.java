@@ -1,5 +1,10 @@
 package com.project.controller.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dto.ProductDTO;
@@ -68,9 +76,12 @@ public class ProductController {
 	      return mav;
 	   }
 	
+	
 	@RequestMapping(value = "/quan-tri/bai-viet/chinh-sua/{id}", method = RequestMethod.GET)
 	   public ModelAndView updateNew(@PathVariable("id") long id) {
 	      ModelAndView mav = new ModelAndView("admin/product/edit");
 	      return mav;
 	   }
+	
+	
 }

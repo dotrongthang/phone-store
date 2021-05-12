@@ -3,6 +3,7 @@
 <c:url var="productURL" value="/quan-tri/san-pham/danh-sach"/>
 <c:url var="editProductURL" value="/quan-tri/san-pham/chinh-sua"/>
 <c:url var="productAPI" value="/api/product"/>
+<c:url var="uploadFileAPI" value="/api/upload"/>
 <html>
 <head>
 <title>Chỉnh sửa sản phẩm</title>
@@ -37,7 +38,7 @@
 				</div>
 				</c:if>
 				
-					<form:form class="form-horizontal" role="form" id="formSubmit" modelAttribute="model">
+					<form:form class="form-horizontal" method="post" role="form" action="savefile" enctype="multipart/form-data" id="formSubmit" modelAttribute="model">
 						<div class="form-group">
 						 <label class="col-sm-3 control-label no-padding-right" for="categoryCode">Hãng: </label>
 						 <div class="col-sm-9">
@@ -57,7 +58,7 @@
 						<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Hình ảnh </label>
 								<div class="col-sm-9">
-									<input type="file" class="col-xs-10 col-sm-5" id="image" name="image"/>
+									<input type="file" class="image-upload" id="image" name="image"/>
 								</div>
 						</div>
 						<div class="form-group">
@@ -91,7 +92,7 @@
 						<div class="form-group">
 							  <label class="col-sm-3 control-label no-padding-right" for="comment">Mô tả</label>
 							  <div class="col-sm-9">
-							  	<form:textarea path="description" rows="5" cols="10" id="description" cssClass="form-control"/>
+							  	<form:textarea path="description" rows="5" cols="10" name="description" id="description" cssClass="form-control"/>
 							  </div>
 						</div>
 						<form:hidden path="id" id="productId"/>
@@ -125,6 +126,40 @@
 	</div>
 </div>
 <script>
+	var editor = '';
+	$(document).ready(function(){
+		editor = CKEDITOR.replace( 'description');
+	});
+	
+	$('#image').change(function () {
+	    var dataArray = {};
+	    var files = $(this)[0].files[0];
+	    if (files != undefined) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                dataArray["photo"] = e.target.result;
+                dataArray["name"] = files.name;
+                uploadFile(dataArray);
+            };
+            reader.readAsDataURL(files);
+		}
+    });
+	
+	function uploadFile(data) {
+	    $.ajax({
+	        url: '${uploadFileAPI}',
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			success: function (res) {
+                console.log(res);
+            },
+			error: function (res) {
+	            console.log(res);
+            }
+		});
+    }
+
 	$('#btnAddOrUpdateProduct').click(function (e) {
 	    e.preventDefault();
 	    var data = {};
@@ -132,6 +167,7 @@
 	    $.each(formData, function (i, v) {
             data[""+v.name+""] = v.value;
         });
+	    data["description"] = editor.getData();
 	    var id = $('#productId').val();
 	    if (id == "") {
             addProduct(data);
