@@ -5,7 +5,25 @@ public class UserDTO extends AbstractDTO<UserDTO> {
 	private String fullname;
 	private String username;
 	private String password;
-	private Integer status;
+	private String status;
+	private String phonenumber;
+	private String address;
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	
 	public String getFullname() {
 		return fullname;
@@ -25,10 +43,10 @@ public class UserDTO extends AbstractDTO<UserDTO> {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	

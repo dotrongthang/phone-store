@@ -110,8 +110,6 @@
 										Thêm sản phẩm
 									</button>
 								</c:if>
-								
-
 											&nbsp; &nbsp; &nbsp;
 								<button class="btn" type="reset">
 									<i class="ace-icon fa fa-undo bigger-110"></i>

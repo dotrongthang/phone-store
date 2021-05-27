@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.project.converter.UserConverter;
+import com.project.dto.ProductDTO;
 import com.project.dto.UserDTO;
+import com.project.entity.ProductEntity;
 import com.project.entity.RoleEntity;
 import com.project.entity.UserEntity;
 import com.project.repository.RoleRepository;
@@ -28,10 +31,16 @@ public class UserService implements IUserService {
 	
 	@Override
 	public UserDTO save(UserDTO dto) {
-		List<RoleEntity> roles = new ArrayList<>();
-		roles.add(roleRepository.findOneByCode("USER"));
-		userRepository.save(userConverter.toEntity(dto, roles));
-		return dto;
+		UserEntity userEntity = new UserEntity();
+		if(dto.getId() != null) {
+			UserEntity oldUser = userRepository.findOne(dto.getId());
+			userEntity = userConverter.toEntity(oldUser, dto);
+		}else {
+			List<RoleEntity> roles = new ArrayList<>();
+			roles.add(roleRepository.findOneByCode("USER"));
+			userEntity = userConverter.toEntity(dto, roles);
+		}
+		return userConverter.toDto(userRepository.save(userEntity));
 	}
 
 	@Override
@@ -43,6 +52,46 @@ public class UserService implements IUserService {
 			models.add(userDTO);
 		}
 		return models;
+	}
+
+	@Override
+	public List<UserDTO> findAll(Pageable pageable) {
+		List<UserDTO> models = new ArrayList<>();
+		List<UserEntity> entities = userRepository.findAll(pageable).getContent();
+		for (UserEntity item: entities) {
+			UserDTO userDTO = userConverter.toDto(item);
+			models.add(userDTO);
+		}
+		return models;
+	}
+
+	@Override
+	public int getTotalItem() {
+		return (int) userRepository.count();
+	}
+
+	@Override
+	public void delete(long[] ids) {
+		for(long id: ids) {
+			userRepository.changeStatus(0, id);
+		}
+	}
+
+	@Override
+	public List<UserDTO> findAllAdmin() {
+		List<UserDTO> models = new ArrayList<>();
+		List<UserEntity> entities = userRepository.findAllOfAdmin();
+		for (UserEntity item: entities) {
+			UserDTO userDTO = userConverter.toDto(item);
+			models.add(userDTO);
+		}
+		return models;
+	}
+
+	@Override
+	public UserDTO findById(Long id) {
+		UserEntity entity = userRepository.findOne(id);
+		return userConverter.toDto(entity);
 	}
 
 //	@Override

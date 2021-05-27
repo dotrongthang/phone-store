@@ -17,4 +17,5 @@ public interface IProductService {
 	ProductDTO save(ProductDTO dto, String nameImage);
 	void delete(long[] ids);
 	List<ProductDTO> findByCategory(CategoryEntity category);
+	List<ProductDTO> findByName(String name);
 }

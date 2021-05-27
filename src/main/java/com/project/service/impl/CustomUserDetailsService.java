@@ -40,6 +40,9 @@ public class CustomUserDetailsService implements UserDetailsService{
 		// put thông tin vào security, duy trì thông tin khi user login vào hệ thống
 		MyUser myUser = new MyUser(userEntity.getUserName(), userEntity.getPassword(), true, true, true, true, authorities);
 		myUser.setFullName(userEntity.getFullName());
+		myUser.setAddress(userEntity.getAddress());
+		myUser.setPhoneNumber(userEntity.getPhoneNumber());
+		myUser.setId(userEntity.getId());
 		return myUser;
 	}
 

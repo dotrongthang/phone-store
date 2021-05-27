@@ -63,9 +63,44 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li>
-                    <a href="<c:url value='/quan-tri/san-pham/danh-sach?page=1&limit=2'/>">
+                    <a href="<c:url value='/quan-tri/nguoi-dung/danh-sach?page=1&limit=2'/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Danh sách người dùng
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                
+                <li>
+                    <a href="<c:url value='/quan-tri/nguoi-dung/danh-sach/admin'/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Danh sách quản trị viên
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        
+        <li >
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-list"></i>
+                <span class="menu-text"></span>
+                Quản lý đơn hàng
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu">
+                <li>
+                    <a href="<c:url value='/quan-tri/don-hang/danh-sach?page=1&limit=2'/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Đang chờ xử lý
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                
+                <li>
+                    <a href="<c:url value='/quan-tri/san-pham/danh-sach?page=1&limit=2'/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Đã xử lý
                     </a>
                     <b class="arrow"></b>
                 </li>

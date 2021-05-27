@@ -1,17 +1,12 @@
 package com.project.service.impl;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.project.converter.ProductConverter;
 import com.project.dto.ProductDTO;
@@ -118,7 +113,7 @@ public class ProductService implements IProductService {
 	@Override
 	public List<ProductDTO> findAll() {
 		List<ProductDTO> models = new ArrayList<>();
-		List<ProductEntity> entities = productRepository.findAll();
+		List<ProductEntity> entities = productRepository.findAll(new Sort(Sort.Direction.DESC, "sold")); // sort By Sold Desc
 		for (ProductEntity item: entities) {
 			ProductDTO newDTO = productConverter.toDto(item);
 			models.add(newDTO);
@@ -130,6 +125,17 @@ public class ProductService implements IProductService {
 	public List<ProductDTO> findByCategory(CategoryEntity category) {
 		List<ProductDTO> models = new ArrayList<>();
 		List<ProductEntity> entities = productRepository.findByCategory(category);
+		for (ProductEntity item: entities) {
+			ProductDTO newDTO = productConverter.toDto(item);
+			models.add(newDTO);
+		}
+		return models;
+	}
+
+	@Override
+	public List<ProductDTO> findByName(String name) {
+		List<ProductDTO> models = new ArrayList<>();
+		List<ProductEntity> entities = productRepository.findByNameContaining(name);
 		for (ProductEntity item: entities) {
 			ProductDTO newDTO = productConverter.toDto(item);
 			models.add(newDTO);

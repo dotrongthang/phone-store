@@ -16,6 +16,7 @@
         <div class="navbar-buttons navbar-header pull-right collapse navbar-collapse" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
+                
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         Xin chào, <%=SecurityUtils.getPrincipal().getFullName()%>
                     </a>
@@ -26,6 +27,8 @@
                         </a>
                     </li>
                 </li>
+                
+                
             </ul>
         </div>
     </div>

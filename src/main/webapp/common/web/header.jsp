@@ -22,7 +22,11 @@
 				</security:authorize>
 				
 				<security:authorize access = "isAuthenticated()">
-				<li class="nav-item"><a class="nav-link" href="#">Wellcome <%=SecurityUtils.getPrincipal().getFullName() %></a></li>
+				<c:set var = "idUser" value="<%=SecurityUtils.getPrincipal().getId() %>"/>
+				<c:url var="updateProductURL" value="/nguoi-dung/chinh-sua">
+					<c:param name="id" value= "${idUser }" />
+				</c:url>
+				<li class="nav-item"><a class="nav-link" href="<c:url value= '${updateProductURL}'/>">Xin chào: <%=SecurityUtils.getPrincipal().getFullName() %></a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value= '/thoat'/>">Thoát</a></li>
 				</security:authorize>
 

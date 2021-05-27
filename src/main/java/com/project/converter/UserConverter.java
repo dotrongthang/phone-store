@@ -17,8 +17,18 @@ public class UserConverter {
 		result.setFullName(dto.getFullname());
 		result.setPassword(BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt(12)));
 		result.setUserName(dto.getUsername());
+		result.setPhoneNumber(dto.getPhonenumber());
+		result.setAddress(dto.getAddress());
 		result.setStatus(1);
 		result.setRoles(roles);
+		return result;
+	}
+	
+	public UserEntity toEntity(UserEntity result, UserDTO dto) {
+		result.setFullName(dto.getFullname());
+		result.setUserName(dto.getUsername());
+		result.setPhoneNumber(dto.getPhonenumber());
+		result.setAddress(dto.getAddress());
 		return result;
 	}
 	
@@ -27,7 +37,15 @@ public class UserConverter {
 		result.setId(entity.getId());
 		result.setFullname(entity.getFullName());
 		result.setUsername(entity.getUserName());
+		result.setPhonenumber(entity.getPhoneNumber());
+		result.setAddress(entity.getAddress());
 		result.setPassword(entity.getPassword());
+		if(entity.getStatus() == 1) {
+			result.setStatus("Hoạt động");
+		}else {
+			result.setStatus("Không hoạt động");
+		}
+		
 		return result;
 	}
 }

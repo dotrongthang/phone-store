@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<c:url var="APIurl" value="/api/register" />
+<c:url var="APIurl" value="/api/user" />
 <c:url var="registerURL" value="/dang-ky"/>
 <html>
 <head>
@@ -48,6 +48,16 @@
 						<input type="password" class="form-input" name="re_password"
 							id="re_password" placeholder="Nhập lại mật khẩu" />
 					</div>
+					
+					<div class="form-group">
+						<input type="text" class="form-input" name="phonenumber"
+							id="phonenumber" placeholder="Số điện thoại" />
+					</div>
+					
+					<div class="form-group">
+						<input type="text" class="form-input" name="address"
+							id="address" placeholder="Địa chỉ" />
+					</div>
 
 					<div class="form-group">
 						<input type="submit" name="submit" id="submit" class="form-submit"
@@ -84,7 +94,7 @@
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success: function (result) {
-	            	window.location.href = "${registerURL}?message=insert_success";
+	            	window.location.href = "${registerURL}?message=register_success";
 	            },
 	            error: function (error) {
 	            	window.location.href = "${registerURL}?message=error_system";

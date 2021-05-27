@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <c:url var="productAPI" value="/api/product"/>
-<c:url var="productURL" value="/quan-tri/san-pham/danh-sach"/>
+<c:url var="productURL" value="/quan-tri/don-hang/danh-sach"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +14,7 @@
 
 	<body>
 		<div class="main-content">
-		<form action="<c:url value='/quan-tri/san-pham/danh-sach'/>" id="formSubmit" method="get">
+		<form action="<c:url value='/quan-tri/don-hang/danh-sach'/>" id="formSubmit" method="get">
 			
 				<div class="main-content-inner">
 					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -27,7 +27,7 @@
 						<!-- /.breadcrumb -->
 					</div>
 					<div class="page-content">
-					<h2>Danh sách sản phẩm</h2>
+					<h2>Danh sách đơn hàng</h2>
 						<div class="row">
 							<div class="col-xs-12">
 							<c:if test="${not empty message}">
@@ -65,12 +65,13 @@
 													<tr>
 														<th><input type="checkbox" id="checkAll"></th>
 														<th>Tên sản phẩm</th>
-														<th>Mô tả sản phẩm</th>
-														<th>Hình ảnh</th>
 														<th>Màu sắc</th>
-														<th>Giá nhập</th>
 														<th>Giá bán</th>
-														<th>Số lượng</th>
+														<th>Tên khách hàng</th>
+														<th>Số điện thoại</th>
+														<th>Địa chỉ</th>
+														<th>Ngày đặt hàng</th>
+														<th>Trạng thái</th>
 														<th>Thao tác</th>
 													</tr>
 												</thead>

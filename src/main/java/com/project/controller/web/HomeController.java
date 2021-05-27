@@ -40,14 +40,21 @@ public class HomeController {
 	private IProductService productService;
 	
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
-	   public ModelAndView homePage(@RequestParam(value ="code" ,required = false) String code) {
+	   public ModelAndView homePage(@RequestParam(value ="code" ,required = false) String code,
+			   						@RequestParam(value ="search" ,required = false) String name) {
 	      ModelAndView mav = new ModelAndView("web/home");
 	      ProductDTO model = new ProductDTO();
 	      if(code != null) {
 	    	  CategoryEntity entity = categoryService.findOneByCode(code);
 		      model.setListResult(productService.findByCategory(entity)); 
 	      }else {
-	    	  model.setListResult(productService.findAll());
+	    	  if(name != null) {
+	    		  model.setListResult(productService.findByName(name));
+	    	  }
+	    	  else {
+	    		  model.setListResult(productService.findAll());
+	    	  }
+	    	 
 	      }
 	      
 	      mav.addObject("categories", categoryService.findAllDTO() );
@@ -89,5 +96,18 @@ public class HomeController {
 	   public ModelAndView accessDenied() {
 	      ModelAndView mav = new ModelAndView("login");
 	      return new ModelAndView("redirect:/dang-nhap?accessDenied");
+	   }
+	
+	@RequestMapping(value = "/nguoi-dung/chinh-sua", method = RequestMethod.GET)
+	   public ModelAndView EditUserPage(@RequestParam(value ="id" ,required = false) Long id, HttpServletRequest request) {
+	      ModelAndView mav = new ModelAndView("web/editUser");
+	      UserDTO model = userService.findById(id);
+	      if (request.getParameter("message") != null) {
+	    	  	Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
+				mav.addObject("message", message.get("message"));
+				mav.addObject("alert",  message.get("alert"));
+		}
+	      mav.addObject("model",  model);
+	      return mav;
 	   }
 }

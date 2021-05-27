@@ -4,7 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,66 +25,60 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.converter.ProductConverter;
+import com.project.converter.UserConverter;
+import com.project.dto.BillDTO;
 import com.project.dto.ProductDTO;
+import com.project.dto.UserDTO;
+import com.project.entity.ProductEntity;
+import com.project.service.IBillService;
 import com.project.service.ICategoryService;
 import com.project.service.IProductService;
 import com.project.util.MessageUtil;
 
-@Controller(value = "productControllerOfAdmin")
-public class ProductController {
+@Controller(value = "billControllerOfAdmin")
+public class BillController {
 
 	@Autowired
-	private IProductService productService;
+	private IBillService billService;
 	
 	@Autowired
 	private MessageUtil messageUtil;
 	
 	@Autowired
-	private ICategoryService categoryService;
+	private UserConverter userConverter;
 	
-	@RequestMapping(value = "/quan-tri/san-pham/danh-sach", method = RequestMethod.GET)
+	@Autowired
+	private ProductConverter productConverter;
+	
+	@RequestMapping(value = "/quan-tri/don-hang/danh-sach", method = RequestMethod.GET)
 	   public ModelAndView showList(@RequestParam("page") int page, 
 			   						@RequestParam("limit") int limit, HttpServletRequest request) {
-		ProductDTO model = new ProductDTO();
+		BillDTO model = new BillDTO();
+		List<ProductDTO> products = new ArrayList<>();
+		List<UserDTO> users = new ArrayList<>();
 		model.setPage(page);
 		model.setLimit(limit);
-		ModelAndView mav = new ModelAndView("admin/product/list");
-		Pageable pageable = new PageRequest(page - 1, limit, new Sort(Sort.Direction.DESC, "sold"));
-		model.setListResult(productService.findAll(pageable));
-		model.setTotalItem(productService.getTotalItem());
+		ModelAndView mav = new ModelAndView("admin/bill/list");
+		Pageable pageable = new PageRequest(page - 1, limit);
+		model.setListResult(billService.findAll(pageable));
+		model.setTotalItem(billService.getTotalItem());
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));
+		
+		for (BillDTO item: model.getListResult()) {
+			products.add(productConverter.toDto(item.getProduct()));
+			users.add(userConverter.toDto(item.getUser()));
+		}
+		
 		if (request.getParameter("message") != null) {
 			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
 			mav.addObject("message", message.get("message"));
 			mav.addObject("alert",  message.get("alert"));
 		}
+		mav.addObject("product", products);
+		mav.addObject("user", users);
 		mav.addObject("model", model);
 		return mav;
 	   }
 
-	@RequestMapping(value = "/quan-tri/san-pham/chinh-sua", method = RequestMethod.GET)
-	   public ModelAndView editNew(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
-	      ModelAndView mav = new ModelAndView("admin/product/edit");
-	      ProductDTO model = new ProductDTO();
-	      if(id != null) {
-	    	  model = productService.findById(id);  
-	      }
-	      if (request.getParameter("message") != null) {
-	    	  	Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
-				mav.addObject("message", message.get("message"));
-				mav.addObject("alert",  message.get("alert"));
-		}
-	      mav.addObject("categories", categoryService.findAll());
-	      mav.addObject("model", model);
-	      return mav;
-	   }
-	
-	
-	@RequestMapping(value = "/quan-tri/bai-viet/chinh-sua/{id}", method = RequestMethod.GET)
-	   public ModelAndView updateNew(@PathVariable("id") long id) {
-	      ModelAndView mav = new ModelAndView("admin/product/edit");
-	      return mav;
-	   }
-	
-	
 }

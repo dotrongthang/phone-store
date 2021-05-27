@@ -1,5 +1,8 @@
 package com.project.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,36 +11,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name= "product")
+@Table(name = "product")
 public class ProductEntity extends BaseEntity {
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "image")
 	private String image;
-	
+
 	@Column(name = "price")
 	private Long price;
-	
+
 	@Column(name = "sold")
 	private Long sold;
-	
+
 	@Column(name = "color")
 	private String color;
-	
+
 	@Column(name = "count")
 	private Long count;
-	
+
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
-	
+
+	@OneToMany(mappedBy = "product")
+	private List<BillEntity> bills = new ArrayList<>();
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
-    private CategoryEntity category;
+	private CategoryEntity category;
+
+	public List<BillEntity> getBills() {
+		return bills;
+	}
+
+	public void setBills(List<BillEntity> bills) {
+		this.bills = bills;
+	}
 
 	public String getName() {
 		return name;
@@ -102,7 +117,5 @@ public class ProductEntity extends BaseEntity {
 	public void setCategory(CategoryEntity category) {
 		this.category = category;
 	}
-	
-	
 
 }
