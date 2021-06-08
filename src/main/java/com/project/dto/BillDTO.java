@@ -8,6 +8,65 @@ public class BillDTO extends AbstractDTO<BillDTO> {
 	private Long userId;
 	private Long productId;
 	private Long amount;
+	private String productName;
+	private String productColor;
+	private Long productSold;
+	private String customerName;
+	private String phoneNumber;
+	private String address;
+	private String dateOfBill;
+	private String statusOfBill;
+	private UserEntity user;
+	private ProductEntity product;
+	
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getProductColor() {
+		return productColor;
+	}
+	public void setProductColor(String productColor) {
+		this.productColor = productColor;
+	}
+	public Long getProductSold() {
+		return productSold;
+	}
+	public void setProductSold(Long productSold) {
+		this.productSold = productSold;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDateOfBill() {
+		return dateOfBill;
+	}
+	public void setDateOfBill(String dateOfBill) {
+		this.dateOfBill = dateOfBill;
+	}
+	public String getStatusOfBill() {
+		return statusOfBill;
+	}
+	public void setStatusOfBill(String statusOfBill) {
+		this.statusOfBill = statusOfBill;
+	}
 	public UserEntity getUser() {
 		return user;
 	}
@@ -20,9 +79,6 @@ public class BillDTO extends AbstractDTO<BillDTO> {
 	public void setProduct(ProductEntity product) {
 		this.product = product;
 	}
-	private String status;
-	private UserEntity user;
-	private ProductEntity product;
 	
 	public Long getProductId() {
 		return productId;
@@ -41,12 +97,6 @@ public class BillDTO extends AbstractDTO<BillDTO> {
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	
 }

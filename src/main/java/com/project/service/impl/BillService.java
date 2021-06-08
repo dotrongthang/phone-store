@@ -27,23 +27,55 @@ public class BillService implements IBillService {
 	@Override
 	public BillDTO save(BillDTO dto) {
 		BillEntity entity = billConverter.toEntity(dto);
-		return billConverter.toDto(billRepository.save(entity));
+		return billConverter.toDtoSave(billRepository.save(entity));
 	}
 
 	@Override
-	public List<BillDTO> findAll(Pageable pageable) {
+	public List<BillDTO> findAllByWaiting(int offset, int limit) {
 		List<BillDTO> models = new ArrayList<>();
-		List<BillEntity> entities = billRepository.findAll(pageable).getContent();
+		List<BillEntity> entities = billRepository.findByStatusAndLimit(0, offset, limit);
 		for (BillEntity item: entities) {
-			BillDTO billDTO = billConverter.toDto(item);
-			models.add(billDTO);
+				BillDTO billDTO = billConverter.toDto(item);
+				models.add(billDTO);
 		}
 		return models;
 	}
 
 	@Override
 	public int getTotalItem() {
-		return (int) billRepository.count();
+		return (int) billRepository.countByStatus(0);
+	}
+
+	@Override
+	public void delete(long[] ids) {
+		for(long id: ids) {
+			billRepository.delete(id);
+		}
+		
+	}
+
+	@Override
+	public List<BillDTO> findAllByDone(int offset, int limit) {
+		List<BillDTO> models = new ArrayList<>();
+		List<BillEntity> entities = billRepository.findByStatusAndLimit(1, offset, limit);
+		for (BillEntity item: entities) {
+				BillDTO billDTO = billConverter.toDto(item);
+				models.add(billDTO);
+		}
+		return models;
+	}
+
+	@Override
+	public int getTotalItemDone() {
+		return (int) billRepository.countByStatus(1);
+	}
+
+	@Override
+	public void update(long[] ids) {
+		for(long id: ids) {
+			billRepository.updateBill(id);
+		}
+		
 	}
 
 }

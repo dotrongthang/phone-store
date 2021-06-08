@@ -98,7 +98,7 @@
                 </li>
                 
                 <li>
-                    <a href="<c:url value='/quan-tri/san-pham/danh-sach?page=1&limit=2'/>">
+                    <a href="<c:url value='/quan-tri/don-hang/thong-ke?page=1&limit=2&status=1'/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Đã xử lý
                     </a>

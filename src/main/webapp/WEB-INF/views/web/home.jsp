@@ -12,25 +12,25 @@
 <title>Trang chủ</title>
 
 <style>
-  .border {
-    display: inline-block;
-    width: 70px;
-    height: 70px;
-    margin: 6px;
-  }
-  </style>
+.border {
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	margin: 6px;
+}
+</style>
 
 </head>
 
 <body>
-
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="search"></div>
 				<div class="search">
 					<form>
-						<input type="text" name="search" style="width: 200px; heigh: 50px;" class="rounded-sm"
+						<input type="text" name="search"
+							style="width: 200px; heigh: 50px;" class="rounded-sm"
 							placeholder="Tìm kiếm sản phẩm..." /> <i class="material-icons">search</i>
 					</form>
 				</div>
@@ -39,14 +39,12 @@
 				<br>
 				<div class="btn-group-vertical">
 					<c:forEach var="item" items="${categories}">
-						<a href="/trang-chu?code=${item.code}" style="width: 200px;" class="shadow-none p-4 mb-4 bg-light">${item.name }</a>
+						<a href="/trang-chu?code=${item.code}" style="width: 200px;"
+							class="shadow-none p-4 mb-4 bg-light">${item.name }</a>
 					</c:forEach>
 				</div>
 			</div>
-			<!-- /.col-lg-3 -->
-
 			<div class="col-lg-9">
-
 				<div id="carouselExampleIndicators" class="carousel slide my-4"
 					data-ride="carousel">
 					<ol class="carousel-indicators">
@@ -82,9 +80,7 @@
 						class="sr-only">Next</span>
 					</a>
 				</div>
-
 				<div class="row">
-
 					<c:forEach var="item" items="${model.listResult}">
 						<c:if test="${item.count > 0}">
 							<div class="col-lg-4 col-md-6 mb-4">
@@ -97,8 +93,6 @@
 										<h5 class="card-title">
 											<a href="#">${item.name}</a>
 										</h5>
-										
-										<%--  <p class="card-text">Mô tả: ${item.description}</p> --%>
 									</div>
 									<div class="card-footer">
 										<h6>Giá bán: ${item.sold} VNĐ</h6>
@@ -106,18 +100,10 @@
 								</div>
 							</div>
 						</c:if>
-
 					</c:forEach>
-
 				</div>
-				<!-- /.row -->
-
 			</div>
-			<!-- /.col-lg-9 -->
-
 		</div>
-		<!-- /.row -->
-
 	</div>
 	<!-- /.container -->
 </body>

@@ -1,8 +1,8 @@
 <%@include file="/common/taglib.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<c:url var="productAPI" value="/api/product"/>
-<c:url var="productURL" value="/quan-tri/don-hang/danh-sach"/>
+<c:url var="billAPI" value="/api/bill"/>
+<c:url var="billURL" value="/quan-tri/don-hang/thong-ke"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +14,7 @@
 
 	<body>
 		<div class="main-content">
-		<form action="<c:url value='/quan-tri/don-hang/danh-sach'/>" id="formSubmit" method="get">
+		<form action="<c:url value='/quan-tri/don-hang/thong-ke'/>" id="formSubmit" method="get">
 			
 				<div class="main-content-inner">
 					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -27,7 +27,7 @@
 						<!-- /.breadcrumb -->
 					</div>
 					<div class="page-content">
-					<h2>Danh sách đơn hàng</h2>
+					<h2>Danh sách đơn hàng đã xử lý</h2>
 						<div class="row">
 							<div class="col-xs-12">
 							<c:if test="${not empty message}">
@@ -35,27 +35,8 @@
 							  	${message}
 							</div>
 							</c:if>
-								<div class="widget-box table-filter">
-									<div class="table-btn-controls">
-										<div class="pull-right tableTools-container">
-											<div class="dt-buttons btn-overlap btn-group">
-												<c:url var="createProductURL" value="/quan-tri/san-pham/chinh-sua"></c:url>
-												<a flag="info"
-												   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-												   title='Thêm sản phẩm' href='${createProductURL}'>
-															<span>
-																<i class="fa fa-plus-circle bigger-110 purple"></i>
-															</span>
-												</a>
-												<button id="btnDelete" type="button" onclick="warningBeforeDelete()"
-														class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title='Xóa sản phẩm'>
-																<span>
-																	<i class="fa fa-trash-o bigger-110 pink"></i>
-																</span>
-												</button>
-											</div>
-										</div>
-									</div>
+								<br>
+									
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
@@ -72,35 +53,27 @@
 														<th>Địa chỉ</th>
 														<th>Ngày đặt hàng</th>
 														<th>Trạng thái</th>
-														<th>Thao tác</th>
 													</tr>
 												</thead>
 												<tbody>
 													<c:forEach var="item" items="${model.listResult}">
 														<tr>
 															<td><input type="checkbox" id="checkbox_${item.id}" value="${item.id}"></td>
-															<td>${item.name}</td>
-															<td>${item.description}</td>
-															<td>${item.image}</td>
-															<td>${item.color}</td>
-															<td>${item.price}</td>
-															<td>${item.sold}</td>
-															<td>${item.count}</td>
-															<td>		
-																<c:url var="updateProductURL" value="/quan-tri/san-pham/chinh-sua">
-																	<c:param name="id" value="${item.id}"/>
-																</c:url>														
-																<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-																   title="Cập nhật sản phẩm" href='${updateProductURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-																</a>
-															</td>
+															<td>${item.productName}</td>
+															<td>${item.productColor}</td>
+															<td>${item.productSold}</td>
+															<td>${item.customerName}</td>
+															<td>${item.phoneNumber}</td>
+															<td>${item.address}</td>
+															<td>${item.createdDate}</td>
+															<td>${item.statusOfBill}</td>
 														</tr>
 													</c:forEach>
 												</tbody>
 											</table>
 											<ul class="pagination" id="pagination"></ul>	
 											<input type="hidden" value="" id="page" name="page"/>
-											<input type="hidden" value="" id="limit" name="limit"/>									
+											<input type="hidden" value="" id="limit" name="limit"/>							
 										</div>
 									</div>
 								</div>
@@ -132,7 +105,7 @@
 			function warningBeforeDelete(){
 				swal({
 					  title: "Xác nhận xóa",
-					  text: "Bạn có chắc chắn muốn xóa không?",
+					  text: "Bạn có chắc chắn từ chối đơn hàng này không?",
 					  type: "warning",
 					  showCancelButton: true,
 					  confirmButtonClass: "btn-success",
@@ -155,15 +128,15 @@
 			
 			function deleteProduct(data) {
 		        $.ajax({
-		            url: '${productAPI}',
+		            url: '${billAPI}',
 		            type: 'DELETE',
 		            contentType: 'application/json',
 		            data: JSON.stringify(data),
 		            success: function (result) {
-		                window.location.href = "${productURL}?page=1&limit=2&message=delete_success";
+		                window.location.href = "${billURL}?page=1&limit=2&message=delete_success";
 		            },
 		            error: function (error) {
-		            	window.location.href = "${productURL}?page=1&limit=2&message=error_system";
+		            	window.location.href = "${billURL}?page=1&limit=2&message=error_system";
 		            }
 		        });
 		    }

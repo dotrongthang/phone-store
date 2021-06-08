@@ -22,17 +22,38 @@ public class BillConverter {
 		result.setAmount(1L);
 		result.setProduct(productRepository.findOne(dto.getProductId()));
 		result.setUser(userRepository.findOne(dto.getUserId()));
-		result.setStatus("Đang chờ xử lý");
+		result.setStatus(0);
 		return result;
 	}
 	
-	public BillDTO toDto(BillEntity entity) {
+	public BillDTO toDtoSave(BillEntity entity) {
 		BillDTO result = new BillDTO();
 		result.setId(entity.getId());
 		result.setAmount(entity.getAmount());
 		result.setProductId(entity.getProduct().getId());
 		result.setUserId(entity.getUser().getId());
-		result.setStatus(entity.getStatus());
+		return result;
+	}
+	
+	public BillDTO toDto(BillEntity entity) {
+		BillDTO result = new BillDTO();
+		if(entity.getStatus() == 0) {
+			result.setStatusOfBill("Đang chờ xử lý");
+		}else {
+			result.setStatusOfBill("Đã xử lý");
+		}
+		result.setId(entity.getId());
+		result.setAmount(entity.getAmount());
+		result.setProductId(entity.getProduct().getId());
+		result.setUserId(entity.getUser().getId());
+		
+		result.setProductName(entity.getProduct().getName());
+		result.setProductColor(entity.getProduct().getColor());
+		result.setProductSold(entity.getProduct().getSold());
+		result.setCustomerName(entity.getUser().getFullName());
+		result.setCreatedDate(entity.getCreatedDate());
+		result.setPhoneNumber(entity.getUser().getPhoneNumber());
+		result.setAddress(entity.getUser().getAddress());
 		return result;
 	}
 }

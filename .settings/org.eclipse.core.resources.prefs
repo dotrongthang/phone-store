@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/project/converter/BillConverter.java=UTF-8
 encoding//src/main/java/com/project/converter/UserConverter.java=UTF-8
+encoding//src/main/java/com/project/repository/BillRepository.java=UTF-8
+encoding//src/main/java/com/project/service/impl/BillService.java=UTF-8
 encoding//src/main/java/com/project/util/MessageUtil.java=UTF-8

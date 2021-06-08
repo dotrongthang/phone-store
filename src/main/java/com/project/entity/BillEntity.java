@@ -11,23 +11,17 @@ import javax.persistence.Table;
 @Table(name = "bill")
 public class BillEntity extends BaseEntity {
 
-	/*
-	 * @Column(name = "user_id") private Long user_id;
-	 * 
-	 * @Column(name = "product_id") private String product_id;
-	 */
-
 	@Column(name = "amount")
 	private Long amount;
 	
-	@Column(name= "status")
-	private String status;
+	@Column
+	private Integer status;
 	
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
